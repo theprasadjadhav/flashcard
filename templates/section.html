@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+  {% block content %}
+  <section class="home-section">
+    <a href=/dashboard/{{LI}} class="text">Dashboard</a>
+    <h5 class="round">&#8250;</h5>
+      <div class="text">DECKS</div>
+      <div class="container">
+        {% if f_all|length==0 %}
+        <div class="alert alert-dark" role="alert">
+            No Deck Available. Please Add.
+        </div>
+    
+    
+        {% else %}
+    
+    
+        {% for f1 in f_all %}
+        <div class="card" id="card-1">
+          <a type="button" href="/card/{{f1.deck_id}}/{{0}}/{{SI}}/{{LI}}">{{f1.deck_name}}</a>
+        </div>
+    
+        {% endfor %}
+        <button class="open-button3" onclick="openEditForm()">*
+          <span class="tooltiptext">EDIT</span> 
+        </button>
+
+        <div class="form-popup" id="editForm">
+           <form action="/edit_deck/{{SI}}/{{LI}}" method="post" class="form-container">
+              <label for="text"><b>Deck Name</b></label>
+              <input type="text" placeholder="name" name="name" required>
+              <div>
+                <button  type="submit" class="btn" >EDIT</button>
+                <button  type="button" class="btn cancel" onclick="closeeditForm()">cancel</button>
+               </div>
+            </form>
+          </div> 
+
+          <button class="open-button2" onclick="openDeleteForm()">-
+            <span class="tooltiptext">DELETE</span> 
+          </button>
+          <div class="form-popup" id="deleteForm">
+            <form action="/delete_deck/{{SI}}/{{LI}}" method="post" class="form-container">
+               <label for="text"><b>Deck Name</b></label>
+               <input type="text" placeholder="name" name="name" required>
+               <div>
+                 <button  type="submit" class="btn" >DELETE</button>
+                 <button  type="button" class="btn cancel" onclick="closeForm()">cancel</button>
+                </div>
+             </form>
+           </div>
+
+        {% endif %}
+
+        <button class="open-button1" onclick="openAddForm()">+
+          <span class="tooltiptext">ADD</span> 
+        </button>
+
+            <div class="form-popup" id="addForm">
+              <form action="/add_deck/{{SI}}/{{LI}}" method="post" class="form-container">
+
+                <label for="text">Deck Name</b></label>
+                <input type="text" placeholder="name" name="name" required>
+                <div>
+                  <button  type="submit" class="btn" >ADD</button>
+                  <button  type="button" class="btn cancel" onclick="closeForm()">cancel</button>
+                </div>
+              </form>
+              
+            </div>  
+    </div>
+  </section>
+  {% endblock %}  
+ 

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+  {% block content %}
+  <section class="home-section">
+      <div class="text">Flashcard</div>
+      
+       <div class="container">
+        <div class="card1" onclick="flip(event)">
+          <div class="front">
+            <h1>QUESTION :</h1>
+            <p> {{f1.question}}</p>
+          </div>
+          <div class="back">
+            <h1>{{f1.answer}}</h1>
+          </div>
+        </div>
+        </div>
+      <form  class="score_form" method="post" action="/card/{{DI}}/{{i}}/{{SI}}/{{LI}}">
+        Easy <input type="radio" name="score" value=5 required>
+         Medium <input type="radio" name="score" value=3 required>
+         Hard <input type="radio" name="score" value=1 required>
+        <br>
+        <button class="nxtbtn" type="submit" >NEXT</button>
+      </form>
+      
+    
+  </section>
+  {% endblock %}

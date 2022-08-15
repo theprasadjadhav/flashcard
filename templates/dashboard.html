@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+  {% block content %}
+  <section class="home-section">
+      <div class="text">Dashboard</div>
+      <div class="container">
+        {% if f_all|length==0 %}
+        <div class="alert alert-dark" role="alert">
+            No Section Available. Please Add.
+        </div>
+
+
+        {% else %}
+
+
+        {% for f1 in f_all %}
+        <div class="card" id="card-1">
+           <a type="button" href="/section/{{f1.section_id}}/{{LI}}">{{f1.section_name}}</a>
+           <p></p>
+        </div>
+
+        {% endfor %}
+        
+        <button class="open-button2" onclick="openDeleteForm()">-
+          <span class="tooltiptext">DELETE</span> 
+        </button>
+
+        <div class="form-popup" id="deleteForm">
+           <form action="/delete_section/{{LI}}" method="post" class="form-container">
+              <label for="text"><b>Section Name</b></label>
+              <input type="text" placeholder="name" name="name" required>
+              <div>
+                <button  type="submit" class="btn" >DELETE</button>
+                <button  type="button" class="btn cancel" onclick="closeForm()">cancel</button>
+               </div>
+            </form>
+          </div>
+
+        {% endif %}
+          <button class="open-button1" onclick="openAddForm()">+
+            <span class="tooltiptext">ADD</span> 
+          </button>
+
+          <div class="form-popup" id="addForm">
+            <form action="/add_section/{{LI}}" method="post" class="form-container">
+              <label for="text"><b>Section Name</b></label>
+              <input type="text" placeholder="name" name="name" required>
+              <div>
+                <button  type="submit" class="btn" >ADD</button>
+                <button  type="button" class="btn cancel" onclick="closeForm()">cancel</button>
+              </div>
+            </form>
+          </div>
+          {%if type=="t"%}
+          <button class="open-button1" onclick="openAddForm()">Add Student</button>
+
+          <div class="form-popup" id="addForm">
+            <form action="/add_student/{{LI}}" method="post" class="form-container">
+              <label for="text"><b>Add Student</b></label>
+              <input type="text" placeholder="Name" name="name"/ required>
+              <input type="text" placeholder="username" name="username"/ required>
+              <input type="password" placeholder="password" name="password"/ required>
+              <input type="tel"  name="phone" placeholder="9876543210" pattern="[7-9]{1}[0-9]{9}" required>
+              <label for="gender">Gender</label>
+              <select name="gender" required>
+                <option value=Male>Male</option>
+                <option value=Female>Female</option>
+                <option value=Other>Other</option>
+              </select>
+              <div>
+                <button  type="submit" class="btn" >ADD</button>
+                <button  type="button" class="btn cancel" onclick="closeForm()">cancel</button>
+              </div>
+            </form>
+          </div>
+
+          <button class="open-button1" onclick="openAddForm()">Assign
+          </button>
+
+          <div class="form-popup" id="addForm">
+            <form action="/assign/{{LI}}" method="post" class="form-container">
+              <label for="text"><b>Assign Section</b></label>
+              <input type="text" placeholder=" section name" name="section_name" required>
+              <div class="dropdown">
+                <button class="dropbtn">Students</button>
+                <div class="dropdown-content">
+                 {%for f in st_all%}
+                  {%if f.teacher_id==LI%}
+                  <input type="radio" name="{{f.st_id}}" value="{{f.student_id}}">
+                  {%endid%}
+                 {%endfor%} 
+                </div>
+              </div>
+              <div>
+                <button  type="submit" class="btn" >ADD</button>
+                <button  type="button" class="btn cancel" onclick="closeForm()">cancel</button>
+              </div>
+            </form>
+          </div>
+          {%endif%}
+    </div>
+  </section>
+  {% endblock %}
+  

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+  {% block content %}
+  <section class="home-section">
+    <a href=/dashboard/{{LI}} class="text">Dashboard</a>
+    <h5 class="round">&#8250;</h5>
+    <div class="text">Score</div>
+      <div class="container">
+        {% if f_all_s|length==0 %}
+        <div class="alert alert-dark" role="alert">
+            No section is available
+        </div>
+        {% else %}
+        {% for fs in f_all_s %}
+          <h1>{{fs.section_name}}:</h1>
+          {%for fd in f_all_d%}
+            {%if fd.section_id==fs.section_id%}
+            <div class="card" id="card-1">
+              <a type="button" href=#>{{fd.deck_name}}:{{fd.score}}</span></a>
+           </div>
+           {%endif%}
+         {%endfor%}
+        {% endfor %}
+        {%endif%}
+      
+      
+      </div>  
+  </section>
+  {% endblock %}
+  

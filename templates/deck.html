@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+  {% block content %}
+  <section class="home-section">
+    <a href=/dashboard/{{LI}} class="text">Dashboard</a>
+    <h5 class="round">&#8250;</h5>
+    <a href=/section/{{SI}}/{{LI}} class="text">Deck</a>
+      <h5 class="round">&#8250;</h5>
+      <div class="text">Flashcards</div>
+      <div class="container">
+        {% if f_all|length==0 %}
+        <div class="alert alert-dark" role="alert">
+            No Flashcards Available. Please Add.
+        </div>
+
+
+        {% else %}
+
+
+        {% for f1 in f_all %}
+        <div class="card" id="card-1">
+           <a type="button" href=#>{{f1.question}}</a>
+        </div>
+
+        {% endfor %}
+            <button class="open-button2" onclick="openDeleteForm()">-
+              <span class="tooltiptext">DELETE</span> 
+            </button>
+
+            <div class="form-popup" id="deleteForm">
+               <form action="/delete_card/{{DI}}/{{SI}}/{{LI}}" method="post" class="form-container">
+                <label for="text"><b>Question</b></label>
+                <input type="text" name="que" required>
+                  <div>
+                    <button  type="submit" class="btn" >DELETE</button>
+                    <button  type="button" class="btn cancel" onclick="closeForm()">cancel</button>
+                   </div>
+                </form>
+              </div>
+
+              {% endif %}  
+
+              <button class="open-button1" onclick="openAddForm()">+
+                <span class="tooltiptext">ADD</span> 
+              </button>
+      
+                  <div class="form-popup" id="addForm">
+                    <form action="/add_card/{{DI}}/{{SI}}/{{LI}}" method="post" class="form-container">
+      
+                      <label for="text"><b>Question</b></label>
+                      <input type="text" name="que" required>
+                      <label for="text"><b>Answer</b></label>
+                      <input type="text" name="ans" required>
+                      <div>
+                        <button  type="submit" class="btn" >ADD</button>
+                        <button  type="button" class="btn cancel" onclick="closeForm()">cancel</button>
+                      </div>
+                    </form>
+                    
+                  </div>
+        
+        
+    </div>
+  </section>
+ {% endblock %}  
